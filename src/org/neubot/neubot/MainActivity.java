@@ -20,13 +20,13 @@ public class MainActivity extends Activity {
 	Button startB;
 	Button stopB;
 	
-	Poller poller;
-	EchoServer echoServer;
+	SWIGTYPE_p_NeubotPoller poller;
+	SWIGTYPE_p_NeubotEchoServer echoServer;
 	
 	Runnable echoServerRunnable= new Runnable() {
         public void run() {
         	Log.d("Loop" , "Begin");
-        	poller.loop();
+        	neubotjava.NeubotPoller_loop(poller);
         	Log.d("Loop" , "End");
         }
 	};
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				poller.break_loop();
+				neubotjava.NeubotPoller_break_loop(poller);
 				Log.d("Main" , "Stop button pressed");
 				startB.setBackgroundColor(Color.argb(255, 150, 150, 150));
 				stopB.setBackgroundColor(Color.argb(255, 255, 0, 0));
@@ -75,8 +75,8 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		poller = new Poller();
-		echoServer = new EchoServer(poller , 0 , "0.0.0.0" , "12345");
+		poller = (SWIGTYPE_p_NeubotPoller)neubotjava.NeubotPoller_construct();
+		echoServer = neubotjava.NeubotEchoServer_construct(poller , 0 , "0.0.0.0" , "12345");
 			
 	}
 

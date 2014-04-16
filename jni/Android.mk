@@ -8,7 +8,11 @@ include $(CLEAR_VARS)
 
 LOCAL_LDLIBS := -llog
 
-LOCAL_SRC_FILES := neubot_wrap.cxx
+LOCAL_CFLAGS := \
+	-DFILENO_TEST \
+	-DNEUBOT_ANDROID 
+
+LOCAL_SRC_FILES := neubot_wrap.c
 		
 LOCAL_MODULE := neubotjava
 
